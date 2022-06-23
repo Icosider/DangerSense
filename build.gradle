@@ -1,0 +1,56 @@
+plugins {
+    id 'idea'
+    id 'net.minecraftforge.gradle' version '5.+'
+}
+
+version = mc_version + '-' + mod_version
+group = mod_group
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(8)
+
+idea {
+    module {
+        inheritOutputDirs = true
+    }
+}
+
+minecraft {
+    mappings channel: 'snapshot', version: '20171003-1.12'
+
+    runs {
+        client {
+            workingDirectory project.file('run')
+            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
+            property 'forge.logging.console.level', 'debug'
+        }
+
+        server {
+            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
+            property 'forge.logging.console.level', 'debug'
+        }
+    }
+}
+
+dependencies {
+    minecraft 'net.minecraftforge:forge:1.12.2-14.23.5.2860'
+}
+
+jar {
+    manifest {
+        attributes([
+            "Specification-Title": "dangersense",
+            "Specification-Vendor": "dangersense",
+            "Specification-Version": "1",
+            "Implementation-Title": project.name,
+            "Implementation-Version": project.jar.archiveVersion,
+            "Implementation-Vendor" :"dangersense",
+            "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+        ])
+    }
+}
+
+jar.finalizedBy('reobfJar')
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
