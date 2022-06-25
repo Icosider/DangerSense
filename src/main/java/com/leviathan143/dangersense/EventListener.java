@@ -57,14 +57,14 @@ public class EventListener {
         return !owner.world.getEntitiesWithinAABB(EntityLiving.class, searchBox, IMob.MOB_SELECTOR).isEmpty();
     }
 
-    private static void renderRect(double w, double h) {
+    private static void renderRect(double width, double height) {
         Tessellator tess = Tessellator.getInstance();
         BufferBuilder buffer = tess.getBuffer();
 
         buffer.begin(GL_QUADS, DefaultVertexFormats.POSITION_TEX_COLOR);
-        buffer.pos(0.0, 0.0 + h, -90.0).tex(0.0, 1.0).color(1F, 1F, 1F, 1F).endVertex();
-        buffer.pos(0.0 + w, 0.0 + h, -90.0).tex(1.0, 1.0).color(1F, 1F, 1F, 1F).endVertex();
-        buffer.pos(0.0 + w, 0.0, -90.0).tex(1.0, 0.0).color(1F, 1F, 1F, 1F).endVertex();
+        buffer.pos(0.0, 0.0 + height, -90.0).tex(0.0, 1.0).color(1F, 1F, 1F, 1F).endVertex();
+        buffer.pos(0.0 + width, 0.0 + height, -90.0).tex(1.0, 1.0).color(1F, 1F, 1F, 1F).endVertex();
+        buffer.pos(0.0 + width, 0.0, -90.0).tex(1.0, 0.0).color(1F, 1F, 1F, 1F).endVertex();
         buffer.pos(0.0, 0.0, -90.0).tex(0.0, 0.0).color(1F, 1F, 1F, 1F).endVertex();
 
         tess.draw();
